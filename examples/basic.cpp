@@ -21,8 +21,8 @@
 #include <iostream>
 #include <vector>
 
-#include <StrategyFrameworkBPModule.hpp>
-#include <PyGEmSManager.h>
+#include <PyGEmS/StrategyFrameworkBPModule.hpp>
+#include <PyGEmS/PyGEmSManager.h>
 
 using namespace NSPyGEmS;
 const unsigned int vecSize = 10;
@@ -30,20 +30,26 @@ unsigned int numResizedNodesInPython = 15;
 
 int main ( int argc, char *argv[] )
 {
-  if ( argc != 2 )
+  if ( argc != 3 )
   {
-    std::cout << "This test requieres 1 parameter: NumResizedNodesInPython." << std::endl;
+    std::cout << "This test requieres 2 parameters: "
+      "strategy_file num_resized_nodes_in_python." << std::endl;
     return 1;
-  } else numResizedNodesInPython = atoi( argv[1] );
+  }
+  else numResizedNodesInPython = atoi( argv[2] );
 
   try
   {
     //BPCode
+#ifdef PYGEMS_USE_PYTHON3
+    //Python >=3
+    PyGEmSManager myPyGEmSManager("StrFramework", &PyInit_StrFramework,
+                                  "Strategies", std::string( argv[1] ));
+#else
     //Python 2.7
-    PyGEmSManager myPyGEmSManager( "StrFramework", &initStrFramework, "Strategies", "Strategies.py" );
-    //Python <=3
-    //init_module_StrFramework();
-    //PyGEmSManager myPyGEmSManager("StrFramework", &PyInit_StrFramework, "Strategies", "Strategies.py");    
+    PyGEmSManager myPyGEmSManager( "StrFramework", &initStrFramework,
+                                   "Strategies",  std::string( argv[1] ));
+#endif
     bp::object Strategy = myPyGEmSManager.getModuleAttrib( "Strategy" );
 
     Container _Container;
@@ -80,7 +86,7 @@ int main ( int argc, char *argv[] )
     std::cout << "Recovering new container from Python." << std::endl;
     bp::list result = myPyGEmSManager.extractListFromModule( injectedVarName3.c_str());
 
-    //int n = bp::extract<int>(result.attr("__len__")());    
+    //int n = bp::extract<int>(result.attr("__len__")());
     int n = bp::len( result );
     std::cout << "Container recovered dimensions Value:" << n << std::endl;
 

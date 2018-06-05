@@ -22,22 +22,27 @@
 
 #include <boost/python.hpp>
 //#include <boost/filesystem.hpp>
+#include "StrategyFrameworkBPModule.hpp"
 
 namespace NSPyGEmS
 {
   namespace bp = boost::python;
 
-  PyGEmSManager::PyGEmSManager ( const std::string &bpModName, void ( *initfunc ) ( void ) //Python 2.7
-          //const std::string & bpModName, PyObject* (*initfunc)(void)  //Python >= 3
-          , const std::string &modName, const std::string &modFile )
+  PyGEmSManager::PyGEmSManager (
+#ifdef PYGEMS_USE_PYTHON3
+    const std::string & bpModName, PyObject* (*initfunc)(void)  //Python >= 3
+#else
+    const std::string &bpModName, void ( *initfunc ) ( void ) //Python 2.7
+#endif
+    , const std::string &modName, const std::string &modFile )
   {
-    Py_Initialize();
 
 //    boost::filesystem::path workingDir = boost::filesystem::absolute("./").normalize();
 //    PyObject* sysPath = PySys_GetObject("path");
 //    PyList_Insert( sysPath, 0, PyBytes_FromString(workingDir.string().c_str()));
 
     PyImport_AppendInittab( bpModName.c_str(), initfunc );
+    Py_Initialize();
 
     _main = bp::import( "__main__" );
     _nameSpace = _main.attr( "__dict__" );
