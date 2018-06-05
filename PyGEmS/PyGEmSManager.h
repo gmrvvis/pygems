@@ -33,9 +33,13 @@ namespace NSPyGEmS
 
   public:
 
-    PyGEmSManager ( const std::string &, void ( *initfunc ) ( void )   //Python 2.7
-            //const std::string & , PyObject* (*initfunc)(void)    //Python > 3
-            , const std::string &, const std::string & );
+    PyGEmSManager (
+#ifdef PYGEMS_USE_PYTHON3
+      const std::string & , PyObject* (*initfunc)(void)    //Python > 3
+#else
+      const std::string &, void ( *initfunc ) ( void )   //Python 2.7
+#endif
+      , const std::string &, const std::string & );
 
     ~PyGEmSManager ( );
 
