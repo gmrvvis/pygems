@@ -1,0 +1,39 @@
+source_group(\\ FILES CMakeLists.txt)
+
+set(PYGEMS_PUBLIC_HEADERS
+  ${COMMON_INCLUDES}
+  Enums.h
+  Container.h
+  StrategyParamsBase.h
+  StrategyParams.h
+  Strategy.h
+  PyStrategy.h
+  PyGEmSManager.h  
+  Utils.hpp
+  StrategyFrameworkBPModule.hpp
+  TStrategyFrameworkBPModule.hpp
+  # templated classes at last
+  TContainer.h
+  TStrategy.h
+  PyTStrategy.h
+)
+
+set(PYGEMS_HEADERS 
+  #  Utils.hpp
+)
+
+set(PYGEMS_SOURCES
+    ${COMMON_SOURCES}
+    StrategyParams.cpp
+    PyGEmSManager.cpp
+    Container.cpp
+    Strategy.cpp
+    StrategyParamsBase.cpp
+    TStrategy.cpp
+    TContainer.cpp
+)
+common_library(PyGEmS)
+
+set_target_properties( PyGEmS
+  PROPERTIES LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
+

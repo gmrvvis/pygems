@@ -1,0 +1,18 @@
+
+include_directories( ../PyGEmS )
+set( PYGEMS_BASICS_SOURCES basic.cpp )
+set( PYGEMS_BASICS_LINK_LIBRARIES PyGEmS ${Boost_LIBRARIES} ${PYTHON_LIBRARIES} )
+common_application( PyGEmS_basics NOHELP )
+
+#set( PYGEMS_TRACINGS_SOURCES tracings.cpp )
+#set( PYGEMS_TRACINGS_LINK_LIBRARIES PyGEmS nsol)
+#common_application( PyGEmS_tracings NOHELP )
+#list( APPEND PYGEMS_EXAMPLES_FILES ${PYGEMS_TRACINGS_SOURCES} )
+
+include(InstallFiles)
+install_files(share/PyGEmS/examples FILES ${PYGEMS_BASICS_EXAMPLES_FILES} COMPONENT
+  examples )
+
+set_target_properties( PyGEmS_basics
+  PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
+
