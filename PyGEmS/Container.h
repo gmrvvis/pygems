@@ -32,13 +32,13 @@ namespace NSPyGEmS
 
   public:
 
-    //Directly from NSOL
-    //void setContainer ( const NSOL::Container & );
     void addElement ( StrategyParams & );
 
     void setContainer ( std::vector<StrategyParams> & );
 
-    const std::vector<StrategyParams> &getContainer ( );
+    const std::vector<StrategyParams> &getConstContainer ( );
+
+    std::vector<StrategyParams> &getContainer ( );
 
     void preProcessContainer ( );
 

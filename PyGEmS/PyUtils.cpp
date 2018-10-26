@@ -21,6 +21,8 @@
 #ifndef __PYGEMS_UTILS__
 #define __PYGEMS_UTILS__
 
+#include "PyUtils.h"
+
 #include <iostream>
 #include <boost/python.hpp>
 
@@ -29,7 +31,7 @@ namespace NSPyGEmS
   namespace bp = boost::python;
 
   //Extracted from BP Wiki
-  bp::object importModule ( const std::string &module, const std::string &path, bp::object &globals )
+  bp::object myImportModule ( const std::string &module, const std::string &path, bp::object &globals )
   {
     bp::dict locals;
     locals["module_name"] = module;
@@ -41,10 +43,8 @@ namespace NSPyGEmS
     bp::exec( "import imp\n"
                       "import sys\n"
                       "new_module = imp.load_module(module_name, open(path), path, ('py', 'U', imp.PY_SOURCE))\n"
-            //"print (new_module)\n"
-            ,
-              globals,
-              locals );
+            ,globals,
+            locals );
 
     std::cout << "---------------" << std::endl;
     return locals["new_module"];

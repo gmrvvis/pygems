@@ -18,38 +18,45 @@
  *
  */
 
-#include <iostream>
-#include "Container.h"
+#ifndef __PYGEMS_PYTSTRATEGY__
+#define __PYGEMS_PYTSTRATEGY__
+
+#include <boost/python.hpp>
+#include "TStrategy.h"
 
 namespace NSPyGEmS
 {
-  void Container::addElement ( StrategyParams &element )
-  {
-    container.push_back( element );
-  }
+  namespace bp = boost::python;
 
-  void Container::setContainer ( std::vector<StrategyParams> &vecIn )
+  template<typename T>
+  class PyTStrategy final : public TStrategy<StrategyParams>, public bp::wrapper<TStrategy<StrategyParams>>
   {
-    container = vecIn;
-  }
+    using TStrategy<T>::TStrategy;
 
-  const std::vector<StrategyParams> &Container::getConstContainer ( )
-  {
-    return container;
-  }
+    void simplify ( ) override
+    {
+      get_override( "simplify" )();
+    }
 
-  std::vector<StrategyParams> &Container::getContainer ( )
-  {
-    return container;
-  }
+    void enhance ( ) override
+    {
+      get_override( "enhance" )();
+    }
 
-  void Container::preProcessContainer ( )
-  {
-    std::cout << "Preparing container for evaluation ... todo" << std::endl;
-  }
+    void fix ( ) override
+    {
+      get_override( "fix" )();
+    }
 
-  void Container::postProcessContainer ( )
-  {
-    std::cout << "Postprocessing container ... todo" << std::endl;
-  }
+    void eval ( ) override
+    {
+      get_override( "eval" )();
+    }
+
+    void sendPartameterToPython ( float params ) override
+    {
+      get_override( "setContainerResizeDimension" )( params );
+    }
+  };
 }
+#endif //

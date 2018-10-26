@@ -24,8 +24,7 @@ int main ( int argc, char* argv[] )
     PyGEmSManager myPyGEmSManager("StrFramework", &initTStrFramework, "Strategies", "Strategies.py");    
     bp::object Strategy   = myPyGEmSManager.getModuleAttrib( "Strategy" );    
 
-    //Problems due to the virtual functions
-     TStrategy<StrategyParams> myTStrategy;
+    TStrategy<StrategyParams> myTStrategy;
      
     StrategyParams  lStrategyParams;    
     for (int  i=0;i<vecSize;++i) 
@@ -33,13 +32,9 @@ int main ( int argc, char* argv[] )
       lStrategyParams.stringParam = "MyTest_" + std::to_string(lStrategyParams.intParam) + "_";      
       lStrategyParams.intParam++;
       glb_vec.push_back(lStrategyParams);
-      
-      //_Container.addElement ( lStrategyParams );
-      //_Container.setContainer ( glb_vec );
     }
     myTStrategy.setContainer ( glb_vec );
 
-    //dangerous!!!
     bp::object _strategy  = reinterpret_cast<bp::object>(myTStrategy);
     
     std::cout<<"Initial vector (Showing only string (from base class) parameter)."<<std::endl;
@@ -66,7 +61,6 @@ int main ( int argc, char* argv[] )
     std::cout <<"Recovering new container from Python."<<std::endl;            
     bp::list result = myPyGEmSManager.extractListFromModule(injectedVarName3.c_str());    
 
-    //int n = bp::extract<int>(result.attr("__len__")());    
     int n = bp::len(result);
     std::cout <<"Container recovered dimensions Value:" <<n <<std::endl;
 
@@ -74,7 +68,6 @@ int main ( int argc, char* argv[] )
     for (int  i=0;i<n;++i) 
     {
         StrategyParams val = bp::extract<StrategyParams>(result[i]);
-        //StrategyParams val = myPyGEmSManager.extractObjectFromList(mStrategyParams,result,i);
         std::cout <<val.stringParam <<std::endl;;
     }
 

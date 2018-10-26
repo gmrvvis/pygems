@@ -21,10 +21,8 @@
 #include "PyGEmSManager.h"
 
 #include <boost/python.hpp>
-//#include <boost/filesystem.hpp>
-#include "StrategyFrameworkBPModule.hpp"
 
-namespace NSPyGEmS
+namespace NSPGManager
 {
   namespace bp = boost::python;
 
@@ -36,17 +34,12 @@ namespace NSPyGEmS
 #endif
     , const std::string &modName, const std::string &modFile )
   {
-
-//    boost::filesystem::path workingDir = boost::filesystem::absolute("./").normalize();
-//    PyObject* sysPath = PySys_GetObject("path");
-//    PyList_Insert( sysPath, 0, PyBytes_FromString(workingDir.string().c_str()));
-
     PyImport_AppendInittab( bpModName.c_str(), initfunc );
     Py_Initialize();
 
     _main = bp::import( "__main__" );
     _nameSpace = _main.attr( "__dict__" );
-    _module = importModule( modName.c_str(), modFile.c_str(), _nameSpace );
+    _module = myImportModule( modName.c_str(), modFile.c_str(), _nameSpace );
   }
 
   PyGEmSManager::~PyGEmSManager ( )

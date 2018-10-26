@@ -1,2 +1,2 @@
 #-*- mode: cmake -*-
-git_subproject(nsol https://github.com/gmrvvis/nsol.git 78aa7b986)
+git_subproject(nsol https://github.com/gmrvvis/nsol.git b4142d64)

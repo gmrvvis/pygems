@@ -1,12 +1,13 @@
 cmake_minimum_required (VERSION 3.2)
-project (PyGEmS VERSION 0.0.1)
+project (PyGEmS VERSION 0.0.2)
 set( PyGEmS_VERSION_ABI 1 )
 
 if(NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE Release)
 endif(NOT CMAKE_BUILD_TYPE)
 
-# Disable in source building
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -fPIC ")
+
 if( "${PROJECT_SOURCE_DIR}" STREQUAL "${PROJECT_BINARY_DIR}" )
  message( FATAL "no in source building allowed." )
 endif( )
@@ -28,9 +29,13 @@ set( COMMON_PROJECT_DOMAIN es.gmrv )
 
 include( Common )
 
+#Qt must not be required!
 #WAR: nsol uses Qt and the keyword "slots" clashes with Python's
 add_definitions(-DQT_NO_KEYWORDS)
 
+common_find_package(Qt5Widgets SYSTEM)
+common_find_package(Qt5Core SYSTEM)
+common_find_package(Qt5Gui SYSTEM)
 common_find_package(PythonInterp REQUIRED)
 common_find_package(PythonLibs REQUIRED)
 common_find_package(Boost REQUIRED COMPONENTS
@@ -40,21 +45,34 @@ common_find_package(nsol REQUIRED)
 if ( nsol_FOUND )
   common_find_package(Eigen3 REQUIRED SYSTEM)
 endif()
-list(APPEND COMMON_FIND_PACKAGE_DEFINES
-  PYGEMS_USE_PYTHON${USE_BOOST_PYTHON_VERSION})
+
+add_definitions( -DPYGEMS_USE_PYTHON3 )
+
 common_find_package_post( )
 
 # Needed because this var is set by PythonLibs and does
 # not follow conventional naming
-include_directories (# ${Boost_INCLUDE_DIRS}
-  ${PYTHON_INCLUDE_DIRS})
+include_directories ( ${Boost_INCLUDE_DIRS}
+                      ${PYTHON_INCLUDE_DIRS})
 
 if ( nsol_FOUND )
   set(PYGEMS_DEPENDENT_LIBRARIES nsol ${Boost_LIBRARIES} ${PYTHON_LIBRARIES})
 endif( )
 
 add_subdirectory( PyGEmS )
-add_subdirectory( examples )
+add_subdirectory( PyGEmSManager )
+add_subdirectory( examples/basics )
+
+#Only if Qt Available
+if (Qt5Widgets_FOUND)
+  add_subdirectory( examples/qttest )
+endif(Qt5Widgets_FOUND)
+
+if ( ${USE_BOOST_PYTHON_VERSION} EQUAL 3 )
+  file(COPY "scripts/Test-Python3.py" DESTINATION "${CMAKE_BINARY_DIR}/bin")
+elseif()
+  file(COPY "scripts/Test-Python2.py" DESTINATION "${CMAKE_BINARY_DIR}/bin")
+endif( )
 
 set(DOCS README.md LICENSE.txt)
 install(FILES ${DOCS} DESTINATION share/PyGEmS COMPONENT dev)

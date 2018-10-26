@@ -28,8 +28,6 @@ namespace NSPyGEmS
           : _container( container )
   { }
 
-  //Strategy::Strategy ( ) { _container = nullptr; }
-
   const Container &Strategy::getContainer ( )
   {
     return _container;

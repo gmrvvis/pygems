@@ -20,44 +20,14 @@
 
 #include <iostream>
 #include <vector>
-#include <assert.h>
 
-#include <nsol/nsol.h>
-
-#include <PyGEmS/StrategyFrameworkBPModule.hpp>
-#include <PyGEmS/PyGEmSManager.h>
+#include <PyGEmSManager/StrategyFrameworkBPModule.h>
+#include <PyGEmSManager/PyGEmSManager.h>
 
 using namespace NSPyGEmS;
+using namespace NSPGManager;
 const unsigned int vecSize = 10;
 unsigned int numResizedNodesInPython = 15;
-
-using namespace nsol;
-
-void traverseTracing ( NeuronMorphologyPtr morpho )
-{
-  for ( auto neurite: morpho->neurites())
-  {
-    std::cout << "=== Neurite ===" << std::endl;
-    for ( auto section: neurite->sections())
-    {
-      std::cout << "==== Section ===" << std::endl;
-      int firstSectionId = section->backwardNode()->id();
-      for ( auto node: section->nodes())
-      {
-        int parentId;
-        if ( firstSectionId == node->id()) parentId = -1; //problem
-        else parentId = node->id() - 1;
-
-        std::cout << "Node: " << node->id();
-        std::cout << " Parent: " << parentId;
-        std::cout << " Coords: (" << node->point().x() << " , " << node->point().y() << " , " << node->point().z()
-                  << " , " << ")";
-        std::cout << " Radius:" << node->radius();
-        std::cout << std::endl;
-      }
-    }
-  }
-}
 
 int main ( int argc, char *argv[] )
 {
@@ -117,7 +87,6 @@ int main ( int argc, char *argv[] )
     std::cout << "Recovering new container from Python." << std::endl;
     bp::list result = myPyGEmSManager.extractListFromModule( injectedVarName3.c_str());
 
-    //int n = bp::extract<int>(result.attr("__len__")());
     int n = bp::len( result );
     std::cout << "Container recovered dimensions Value:" << n << std::endl;
 
@@ -125,7 +94,6 @@ int main ( int argc, char *argv[] )
     for ( int i = 0; i < n; ++i )
     {
       StrategyParams val = bp::extract<StrategyParams>( result[i] );
-      //StrategyParams val = myPyGEmSManager.extractObjectFromList(mStrategyParams,result,i);
       std::cout << val.stringParam << std::endl;;
     }
 

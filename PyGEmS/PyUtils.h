@@ -18,48 +18,18 @@
  *
  */
 
-#ifndef __PYGEMS_PYTSTRATEGY__
-#define __PYGEMS_PYTSTRATEGY__
+#ifndef __PYGEMS_UTILS__
+#define __PYGEMS_UTILS__
 
+#include <iostream>
 #include <boost/python.hpp>
-#include "TStrategy.h"
 
 namespace NSPyGEmS
 {
   namespace bp = boost::python;
 
-  template<typename T>
-  class PyTStrategy final : public TStrategy<StrategyParams>, public bp::wrapper<TStrategy<StrategyParams>>
-
-//  class PyTStrategy final:public TStrategy<T>
-//                        ,public bp::wrapper<TStrategy<T>>
-  {
-    using TStrategy<T>::TStrategy;
-
-    void simplify ( ) override
-    {
-      get_override( "simplify" )();
-    }
-
-    void enhance ( ) override
-    {
-      get_override( "enhance" )();
-    }
-
-    void fix ( ) override
-    {
-      get_override( "fix" )();
-    }
-
-    void eval ( ) override
-    {
-      get_override( "eval" )();
-    }
-
-    void sendPartameterToPython ( float params ) override
-    {
-      get_override( "setContainerResizeDimension" )( params );
-    }
-  };
+  bp::object myImportModule ( const std::string &module, const std::string &path, bp::object &globals );
+  std::ostream &operator<< ( std::ostream &os, const bp::object &o );
 }
+
 #endif //

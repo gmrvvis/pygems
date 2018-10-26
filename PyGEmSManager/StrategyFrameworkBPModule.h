@@ -21,15 +21,17 @@
 #ifndef __PYGEMS_STRATEGYFRAMEWORKBPMODULE__
 #define __PYGEMS_STRATEGYFRAMEWORKBPMODULE__
 
-#include "Container.h"
-#include "Strategy.h"
-#include "PyStrategy.h"
-#include "Utils.hpp"
+#include <PyGEmS/Container.h>
+#include <PyGEmS/Strategy.h>
+#include <PyGEmS/PyStrategy.h>
+#include <PyGEmS/PyUtils.h>
 
 #include <boost/python.hpp>
 #include <boost/python/suite/indexing/vector_indexing_suite.hpp>
 
-namespace NSPyGEmS
+using namespace NSPyGEmS;
+
+namespace NSPGManager
 {
   //Expose to python
   BOOST_PYTHON_MODULE ( StrFramework )

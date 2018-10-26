@@ -5,17 +5,21 @@ include_directories(
 set(PYGEMS_PUBLIC_HEADERS
   Container.h
   Enums.h
-  PyGEmSManager.h
   PyStrategy.h
-  PyTStrategy.h
   Strategy.h
   StrategyParamsBase.h
   StrategyParams.h
-  TContainer.h
-  TStrategy.h
-  StrategyFrameworkBPModule.hpp
-  TStrategyFrameworkBPModule.hpp
-  Utils.hpp
+  PyUtils.h
+
+#Preparing templating!
+#Templating
+#  PyTStrategy.h
+#  TContainer.h
+#  TStrategy.h
+#  TStrategyFrameworkBPModule.hpp
+
+#  PyGEmSManager.h
+#  StrategyFrameworkBPModule.h
   )
 
 set(PYGEMS_HEADERS
@@ -23,12 +27,17 @@ set(PYGEMS_HEADERS
 
 set(PYGEMS_SOURCES
   Container.cpp
-  PyGEmSManager.cpp
   Strategy.cpp
   StrategyParamsBase.cpp
   StrategyParams.cpp
-  TContainer.cpp
-  TStrategy.cpp
+  PyUtils.cpp
+
+#Templating
+#  TContainer.cpp
+#  TStrategy.cpp
+
+#  PyGEmSManager.cpp
+#  StrategyFrameworkBPModule.cpp
   )
 
 common_library(PyGEmS)

@@ -32,8 +32,6 @@ namespace NSPyGEmS
 
     Strategy ( Container & );
 
-    //Strategy ( );
-
     virtual ~Strategy ( ) = default;
 
     virtual void simplify ( ) = 0;

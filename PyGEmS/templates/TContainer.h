@@ -39,7 +39,6 @@ namespace NSPyGEmS
 
     virtual ~TContainer ( ) = default;
 
-    //void setContainer ( const NSOL::Container & );
     void setContainer ( std::vector<T> & );
 
     const std::vector<T> &getContainer ( );

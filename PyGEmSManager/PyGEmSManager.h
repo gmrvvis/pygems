@@ -21,9 +21,11 @@
 #ifndef __PYGEMS_MANAGER__
 #define __PYGEMS_MANAGER__
 
-#include "Utils.hpp"
+#include <PyGEmS/PyUtils.h>
 
-namespace NSPyGEmS
+using namespace NSPyGEmS;
+
+namespace NSPGManager
 {
   class PyGEmSManager
   {
@@ -34,11 +36,11 @@ namespace NSPyGEmS
   public:
 
     PyGEmSManager (
-#ifdef PYGEMS_USE_PYTHON3
-      const std::string & , PyObject* (*initfunc)(void)    //Python > 3
-#else
-      const std::string &, void ( *initfunc ) ( void )   //Python 2.7
-#endif
+ #ifdef PYGEMS_USE_PYTHON3
+       const std::string & , PyObject* (*initfunc)(void)    //Python > 3
+ #else
+       const std::string &, void ( *initfunc ) ( void )   //Python 2.7
+ #endif
       , const std::string &, const std::string & );
 
     ~PyGEmSManager ( );
