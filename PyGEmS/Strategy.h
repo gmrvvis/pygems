@@ -40,6 +40,8 @@ namespace NSPyGEmS
 
     virtual void fix ( ) = 0;
 
+    virtual void userDefined ( ) = 0;
+
     virtual void eval ( ) = 0;
 
     virtual void sendPartameterToPython ( float ) = 0;

@@ -41,10 +41,10 @@ namespace NSPyGEmS
     std::cout << path << std::endl;
 
     bp::exec( "import imp\n"
-                      "import sys\n"
-                      "new_module = imp.load_module(module_name, open(path), path, ('py', 'U', imp.PY_SOURCE))\n"
-            ,globals,
-            locals );
+              "import sys\n"
+              "new_module = imp.load_module(module_name, open(path), path, ('py', 'U', imp.PY_SOURCE))\n"
+              ,globals,
+              locals );
 
     std::cout << "---------------" << std::endl;
     return locals["new_module"];

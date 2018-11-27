@@ -115,6 +115,7 @@ int main ( int argc, char *argv[] )
     _strategy.attr( "simplify" )();
     _strategy.attr( "fix" )();
     _strategy.attr( "enhance" )();
+    _strategy.attr( "userDefined" )();
 
     std::cout << "Recovering new container from Python." << std::endl;
     bp::list result = myPyGEmSManager.extractListFromModule( injectedVarName3.c_str());

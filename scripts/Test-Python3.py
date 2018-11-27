@@ -26,8 +26,7 @@ class Strategy(Container):
 
   def simplify(self):
     print ("Py: Running Python code! Simplifiying -> To be implemented")    
-  
-  
+
   def enhance(self):
     print ("Py: Running Python code! Enhancing")
     
@@ -49,8 +48,13 @@ class Strategy(Container):
     self.xMedia = self.xMedia / self.dims;
       
   def fix(self):
-    print ("Py: Running Python code! Fixing -> To be implemented")    
+    print ("Py: Running Python code! Fixing -> To be implemented")
 
+  def userDefined(self):
+    print ("Py: Calling user defined method!")
+    self.enhance()
+    self.simplify()
+    self.fix()
 
   def eval(self):
     print ("Py: Running Python code! Evaluation (Used for CPP-Python ping.pong parameter test!)")

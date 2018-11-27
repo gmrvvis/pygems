@@ -33,7 +33,7 @@ class Strategy(Container):
     displacement = 3
     simplifiedNodes = []
 
-    print ("Simplifiying only odd nodes! ")
+    print ("Py: Simplifiying only odd nodes! ")
     for i in range (0, len(originalNodes)):
       if i%displacement == 0:
         o = StrategyParams()
@@ -46,8 +46,8 @@ class Strategy(Container):
         o.node.parent = originalNodes[i].node.parent
         simplifiedNodes.append(o)
 
-    print ("Original elements: ", str(len(originalNodes)))
-    print ("New elements: ", str(len(simplifiedNodes)))
+    print ("Py: Original elements: ", str(len(originalNodes)))
+    print ("Py: New elements: ", str(len(simplifiedNodes)))
 
   def enhance(self):
     print ("Py: Running Python code! Enhancing")
@@ -58,7 +58,7 @@ class Strategy(Container):
     originalId = originalNodes[0].node.id
     simplifiedNodes = []
 
-    print ("Applying simple midpoint linear enhancing! ")
+    print ("Py: Applying simple midpoint linear enhancing! ")
     for i in range (0, len(originalNodes)-1):
       o = StrategyParams()
       o.pyStringParam = "Id_" + str(i+originalId);
@@ -85,11 +85,17 @@ class Strategy(Container):
 
     #Last node
     simplifiedNodes.append(originalNodes[len(originalNodes)-1])
-    print ("Original elements: ", str(len(originalNodes)))
-    print ("New elements: ", str(len(simplifiedNodes)))
+    print ("Py: Original elements: ", str(len(originalNodes)))
+    print ("Py: New elements: ", str(len(simplifiedNodes)))
       
   def fix(self):
-    print ("Py: Running Python code! Fixing -> To be implemented")    
+    print ("Py: Running Python code! Fixing -> To be implemented")
+
+  def userDefined(self):
+    print ("Py: Calling user defined method!")
+    self.enhance()
+    self.simplify()
+    self.fix()
 
   def eval(self):
     print ("Py: Running Python code! Evaluation (Used for CPP-Python ping.pong parameter test!)")

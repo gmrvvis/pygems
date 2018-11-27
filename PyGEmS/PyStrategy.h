@@ -47,6 +47,11 @@ namespace NSPyGEmS
       get_override( "fix" )();
     }
 
+    void userDefined ( ) override
+    {
+      get_override( "userDefined" )();
+    }
+
     void eval ( ) override
     {
       get_override( "eval" )();
