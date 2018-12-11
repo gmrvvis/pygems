@@ -26,55 +26,55 @@ namespace NSPGManager
 {
   namespace bp = boost::python;
 
-  PyGEmSManager::PyGEmSManager (
+  PyGEmSManager::PyGEmSManager(
 #ifdef PYGEMS_USE_PYTHON3
-    const std::string & bpModName, PyObject* (*initfunc)(void)  //Python >= 3
+    const std::string& bpModName, PyObject* (* initfunc)( void )
 #else
     const std::string &bpModName, void ( *initfunc ) ( void ) //Python 2.7
 #endif
-    , const std::string &modName, const std::string &modFile )
+    , const std::string& modName, const std::string& modFile )
   {
-    PyImport_AppendInittab( bpModName.c_str(), initfunc );
-    Py_Initialize();
+    PyImport_AppendInittab( bpModName.c_str( ), initfunc );
+    Py_Initialize( );
 
     _main = bp::import( "__main__" );
     _nameSpace = _main.attr( "__dict__" );
-    _module = myImportModule( modName.c_str(), modFile.c_str(), _nameSpace );
+    _module = myImportModule( modName.c_str( ), modFile.c_str( ), _nameSpace );
   }
 
-  PyGEmSManager::~PyGEmSManager ( )
+  PyGEmSManager::~PyGEmSManager( )
   {
     //De-Init Python!!!
   }
 
-  bp::object PyGEmSManager::getModule ( )
+  bp::object PyGEmSManager::getModule( )
   {
     return _module;
   }
 
-  bp::object PyGEmSManager::getNamespace ( )
+  bp::object PyGEmSManager::getNamespace( )
   {
     return _nameSpace;
   }
 
-  void PyGEmSManager::injectValue ( const std::string &value )
+  void PyGEmSManager::injectValue( const std::string& value )
   {
-    _module.attr( value.c_str());
+    _module.attr( value.c_str( ));
   }
 
-  bp::object PyGEmSManager::getModuleAttrib ( const std::string &attrName )
+  bp::object PyGEmSManager::getModuleAttrib( const std::string& attrName )
   {
-    return _module.attr( attrName.c_str());
+    return _module.attr( attrName.c_str( ));
   }
 
-  bp::list PyGEmSManager::extractListFromModule ( const std::string &listName )
+  bp::list PyGEmSManager::extractListFromModule( const std::string& listName )
   {
-    return bp::extract<bp::list>( _module.attr( listName.c_str()));
+    return bp::extract < bp::list >( _module.attr( listName.c_str( )));
   }
 
-  template<typename T>
-  T PyGEmSManager::extractObjectFromList ( T, bp::list &list, unsigned int pos )
+  template< typename T >
+  T PyGEmSManager::extractObjectFromList( T, bp::list& list, unsigned int pos )
   {
-    return bp::extract<T>( list[pos] );
+    return bp::extract < T >( list[pos] );
   }
 }

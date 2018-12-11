@@ -28,31 +28,31 @@ namespace NSPyGEmS
 {
   class Strategy
   {
-  public:
+    public:
 
-    Strategy ( Container & );
+      Strategy( Container& );
 
-    virtual ~Strategy ( ) = default;
+      virtual ~Strategy( ) = default;
 
-    virtual void simplify ( ) = 0;
+      virtual void simplify( ) = 0;
 
-    virtual void enhance ( ) = 0;
+      virtual void enhance( ) = 0;
 
-    virtual void fix ( ) = 0;
+      virtual void fix( ) = 0;
 
-    virtual void userDefined ( ) = 0;
+      virtual void userDefined( ) = 0;
 
-    virtual void eval ( ) = 0;
+      virtual void eval( ) = 0;
 
-    virtual void sendPartameterToPython ( float ) = 0;
+      virtual void sendPartameterToPython( float ) = 0;
 
-    void receivingParameterFromPython ( float );
+      void receivingParameterFromPython( float );
 
-    const Container &getContainer ( );
+      const Container& getContainer( );
 
-  private:
+    private:
 
-    Container &_container;
+      Container& _container;
   };
 }
 

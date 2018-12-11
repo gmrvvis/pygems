@@ -29,34 +29,34 @@ namespace NSPGManager
 {
   class PyGEmSManager
   {
-    bp::object _main;
-    bp::object _nameSpace;
-    bp::object _module;
+      bp::object _main;
+      bp::object _nameSpace;
+      bp::object _module;
 
-  public:
+    public:
 
-    PyGEmSManager (
- #ifdef PYGEMS_USE_PYTHON3
-       const std::string & , PyObject* (*initfunc)(void)    //Python > 3
- #else
-       const std::string &, void ( *initfunc ) ( void )   //Python 2.7
- #endif
-      , const std::string &, const std::string & );
+      PyGEmSManager(
+#ifdef PYGEMS_USE_PYTHON3
+        const std::string&, PyObject* (* initfunc)( void )
+#else
+        const std::string &, void ( *initfunc ) ( void )   //Python 2.7
+#endif
+        , const std::string&, const std::string& );
 
-    ~PyGEmSManager ( );
+      ~PyGEmSManager( );
 
-    bp::object getModule ( );
+      bp::object getModule( );
 
-    bp::object getNamespace ( );
+      bp::object getNamespace( );
 
-    bp::object getModuleAttrib ( const std::string & );
+      bp::object getModuleAttrib( const std::string& );
 
-    bp::list extractListFromModule ( const std::string & );
+      bp::list extractListFromModule( const std::string& );
 
-    void injectValue ( const std::string & );
+      void injectValue( const std::string& );
 
-    template<typename T>
-    T extractObjectFromList ( T, bp::list &list, unsigned int pos );
+      template< typename T >
+      T extractObjectFromList( T, bp::list& list, unsigned int pos );
   };
 }
 

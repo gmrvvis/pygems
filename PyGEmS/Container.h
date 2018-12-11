@@ -28,21 +28,21 @@ namespace NSPyGEmS
 {
   class Container
   {
-    std::vector<StrategyParams> container;
+      std::vector < StrategyParams > container;
 
-  public:
+    public:
 
-    void addElement ( StrategyParams & );
+      void addElement( StrategyParams& );
 
-    void setContainer ( std::vector<StrategyParams> & );
+      void setContainer( std::vector < StrategyParams >& );
 
-    const std::vector<StrategyParams> &getConstContainer ( );
+      const std::vector < StrategyParams >& getConstContainer( );
 
-    std::vector<StrategyParams> &getContainer ( );
+      std::vector < StrategyParams >& getContainer( );
 
-    void preProcessContainer ( );
+      void preProcessContainer( );
 
-    void postProcessContainer ( );
+      void postProcessContainer( );
   };
 }
 #endif //

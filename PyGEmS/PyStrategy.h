@@ -28,39 +28,39 @@ namespace NSPyGEmS
 {
   namespace bp = boost::python;
 
-  class PyStrategy final : public Strategy, public bp::wrapper<Strategy>
+  class PyStrategy final: public Strategy, public bp::wrapper < Strategy >
   {
-    using Strategy::Strategy;
+      using Strategy::Strategy;
 
-    void simplify ( ) override
-    {
-      get_override( "simplify" )();
-    }
+      void simplify( ) override
+      {
+        get_override( "simplify" )( );
+      }
 
-    void enhance ( ) override
-    {
-      get_override( "enhance" )();
-    }
+      void enhance( ) override
+      {
+        get_override( "enhance" )( );
+      }
 
-    void fix ( ) override
-    {
-      get_override( "fix" )();
-    }
+      void fix( ) override
+      {
+        get_override( "fix" )( );
+      }
 
-    void userDefined ( ) override
-    {
-      get_override( "userDefined" )();
-    }
+      void userDefined( ) override
+      {
+        get_override( "userDefined" )( );
+      }
 
-    void eval ( ) override
-    {
-      get_override( "eval" )();
-    }
+      void eval( ) override
+      {
+        get_override( "eval" )( );
+      }
 
-    void sendPartameterToPython ( float params ) override
-    {
-      get_override( "setContainerResizeDimension" )( params );
-    }
+      void sendPartameterToPython( float params ) override
+      {
+        get_override( "setContainerResizeDimension" )( params );
+      }
   };
 }
 #endif //

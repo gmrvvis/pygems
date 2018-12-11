@@ -36,46 +36,50 @@ namespace NSPGManager
   //Expose to python
   BOOST_PYTHON_MODULE ( StrFramework )
   {
-    bp::enum_<TracingOperation>( "TracingOperation" )
-            .value( "NONE", TracingOperation::NONE )
-            .value( "SIMPLIFY", TracingOperation::SIMPLIFY )
-            .value( "ENHANCE", TracingOperation::ENHANCE )
-            .value( "FIX", TracingOperation::FIX );
+    bp::enum_ < TracingOperation >( "TracingOperation" )
+      .value( "NONE", TracingOperation::NONE )
+      .value( "SIMPLIFY", TracingOperation::SIMPLIFY )
+      .value( "ENHANCE", TracingOperation::ENHANCE )
+      .value( "FIX", TracingOperation::FIX );
 
-    bp::enum_<NodeType>( "NodeType" )
-            .value( "SOMA", NodeType::SOMA )
-            .value( "BIFURCATION", NodeType::BIFURCATION )
-            .value( "ENDING", NodeType::ENDING )
-            .value( "REGULAR", NodeType::REGULAR );
+    bp::enum_ < NodeType >( "NodeType" )
+      .value( "SOMA", NodeType::SOMA )
+      .value( "BIFURCATION", NodeType::BIFURCATION )
+      .value( "ENDING", NodeType::ENDING )
+      .value( "REGULAR", NodeType::REGULAR );
 
-    bp::class_<Point3D>( "Point3D", bp::no_init )
-            .def_readwrite( "X", &Point3D::x )
-            .def_readwrite( "Y", &Point3D::y )
-            .def_readwrite( "Z", &Point3D::z );
+    bp::class_ < Point3D >( "Point3D", bp::no_init )
+      .def_readwrite( "X", &Point3D::x )
+      .def_readwrite( "Y", &Point3D::y )
+      .def_readwrite( "Z", &Point3D::z );
 
-    bp::class_<TracingNode>( "TracingNode", bp::no_init )
-            .def_readwrite( "id", &TracingNode::id )
-            .def_readwrite( "parent", &TracingNode::parent )
-            .def_readwrite( "radius", &TracingNode::radius )
-            .def_readwrite( "type", &TracingNode::type )
-            .def_readwrite( "position", &TracingNode::position );
+    bp::class_ < TracingNode >( "TracingNode", bp::no_init )
+      .def_readwrite( "id", &TracingNode::id )
+      .def_readwrite( "parent", &TracingNode::parent )
+      .def_readwrite( "radius", &TracingNode::radius )
+      .def_readwrite( "type", &TracingNode::type )
+      .def_readwrite( "position", &TracingNode::position );
 
-    bp::class_<StrategyParamsBase>( "Base", bp::no_init );
+    bp::class_ < StrategyParamsBase >( "Base", bp::no_init );
 
-    bp::class_ < StrategyParams, bp::bases < StrategyParamsBase >> ("StrategyParams", bp::init<>())
-            .def_readwrite( "pyIntParam", &StrategyParams::intParam )
-            .def_readwrite( "pyFloatParam", &StrategyParams::floatParam )
-            .def_readwrite( "pyStringParam", &StrategyParams::stringParam )
-            .def_readwrite( "operation", &StrategyParams::operation )
-            .def_readwrite( "node", &StrategyParams::node );
+    bp::class_ < StrategyParams, bp::bases < StrategyParamsBase >>(
+      "StrategyParams",
+      bp::init <>( ))
+      .def_readwrite( "pyIntParam", &StrategyParams::intParam )
+      .def_readwrite( "pyFloatParam", &StrategyParams::floatParam )
+      .def_readwrite( "pyStringParam", &StrategyParams::stringParam )
+      .def_readwrite( "operation", &StrategyParams::operation )
+      .def_readwrite( "node", &StrategyParams::node );
 
-    bp::class_<Container>( "Container" );
+    bp::class_ < Container >( "Container" );
 
-    bp::class_<PyStrategy, boost::noncopyable>( "Container", bp::init<Container &>()
-    ).def( "sendParamaterToCppApplication", &Strategy::receivingParameterFromPython );
+    bp::class_ < PyStrategy, boost::noncopyable >( "Container",
+                                                   bp::init < Container& >( )
+    ).def( "sendParamaterToCppApplication",
+           &Strategy::receivingParameterFromPython );
 
-    bp::class_<std::vector<StrategyParams> >( "PyGEmSVec" )
-            .def( bp::vector_indexing_suite<std::vector<StrategyParams> >());
+    bp::class_ < std::vector < StrategyParams > >( "PyGEmSVec" )
+      .def( bp::vector_indexing_suite < std::vector < StrategyParams > >( ));
   }
 }
 #endif //

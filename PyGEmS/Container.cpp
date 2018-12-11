@@ -23,32 +23,32 @@
 
 namespace NSPyGEmS
 {
-  void Container::addElement ( StrategyParams &element )
+  void Container::addElement( StrategyParams& element )
   {
     container.push_back( element );
   }
 
-  void Container::setContainer ( std::vector<StrategyParams> &vecIn )
+  void Container::setContainer( std::vector < StrategyParams >& vecIn )
   {
     container = vecIn;
   }
 
-  const std::vector<StrategyParams> &Container::getConstContainer ( )
+  const std::vector < StrategyParams >& Container::getConstContainer( )
   {
     return container;
   }
 
-  std::vector<StrategyParams> &Container::getContainer ( )
+  std::vector < StrategyParams >& Container::getContainer( )
   {
     return container;
   }
 
-  void Container::preProcessContainer ( )
+  void Container::preProcessContainer( )
   {
     std::cout << "Preparing container for evaluation ... todo" << std::endl;
   }
 
-  void Container::postProcessContainer ( )
+  void Container::postProcessContainer( )
   {
     std::cout << "Postprocessing container ... todo" << std::endl;
   }

@@ -24,22 +24,23 @@
 
 namespace NSPyGEmS
 {
-  Strategy::Strategy ( Container &container )
-          : _container( container )
-  { }
+  Strategy::Strategy( Container& container )
+    : _container( container ) {}
 
-  const Container &Strategy::getContainer ( )
+  const Container& Strategy::getContainer( )
   {
     return _container;
   };
 
   //Method for ping-pong parameters test: Python call CPP, makes some processing and then CPP call Python again!
-  void Strategy::receivingParameterFromPython ( float receivedValue )
+  void Strategy::receivingParameterFromPython( float receivedValue )
   {
-    std::cout << "CPP method called from Python Value: " << receivedValue << std::endl;
+    std::cout << "CPP method called from Python Value: " << receivedValue
+              << std::endl;
 
     unsigned int parameterToSend = receivedValue * 2;
-    std::cout << "Calling python from CPP Value: " << parameterToSend << std::endl;
+    std::cout << "Calling python from CPP Value: " << parameterToSend
+              << std::endl;
 
     this->sendPartameterToPython( parameterToSend );
   }

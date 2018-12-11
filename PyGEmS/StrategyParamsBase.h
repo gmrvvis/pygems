@@ -32,7 +32,7 @@ namespace NSPyGEmS
   {
     std::string stringParam = "Description";
 
-    bool operator== ( const StrategyParamsBase & );
+    bool operator==( const StrategyParamsBase& );
   };
 
   struct Point3D

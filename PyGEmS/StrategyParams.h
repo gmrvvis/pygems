@@ -26,7 +26,7 @@
 
 namespace NSPyGEmS
 {
-  struct StrategyParams : StrategyParamsBase
+  struct StrategyParams: StrategyParamsBase
   {
     //Simplification parameters (Eg radius distance, alternative deletion of nodes ...) specific for certain nodes
     //Could determined if some neurites have more importance, or different parameters of simplification

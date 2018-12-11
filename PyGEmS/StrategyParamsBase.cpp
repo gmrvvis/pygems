@@ -22,7 +22,7 @@
 
 namespace NSPyGEmS
 {
-  bool StrategyParamsBase::operator== ( const StrategyParamsBase &stratParams )
+  bool StrategyParamsBase::operator==( const StrategyParamsBase& stratParams )
   {
     return this == &stratParams;
   }

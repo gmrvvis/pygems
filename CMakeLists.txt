@@ -1,4 +1,4 @@
-cmake_minimum_required (VERSION 3.2)
+cmake_minimum_required (VERSION 3.10)
 project (PyGEmS VERSION 0.0.2)
 set( PyGEmS_VERSION_ABI 1 )
 
@@ -68,10 +68,16 @@ if (Qt5Widgets_FOUND)
   add_subdirectory( examples/qttest )
 endif(Qt5Widgets_FOUND)
 
-if ( ${USE_BOOST_PYTHON_VERSION} EQUAL 3 )
-  file(COPY "scripts/Test-Python3.py" DESTINATION "${CMAKE_BINARY_DIR}/bin")
-elseif()
-  file(COPY "scripts/Test-Python2.py" DESTINATION "${CMAKE_BINARY_DIR}/bin")
+if ( (${USE_BOOST_PYTHON_VERSION} EQUAL 3) OR (${USE_BOOST_PYTHON_VERSION} EQUAL 2))
+  set (BP_VERSION ${USE_BOOST_PYTHON_VERSION})
+else ()
+  string(SUBSTRING ${USE_BOOST_PYTHON_VERSION} 3 1 BP_VERSION)
+endif ()
+
+if ( ${BP_VERSION} EQUAL 3 )
+  file(COPY "scripts/Test-Python3.py" "scripts/Strategies-Python3.py" DESTINATION "${CMAKE_BINARY_DIR}/bin")
+else ( )
+  file(COPY "scripts/Test-Python2.py" "scripts/Strategies-Python2.py" DESTINATION "${CMAKE_BINARY_DIR}/bin")
 endif( )
 
 set(DOCS README.md LICENSE.txt)

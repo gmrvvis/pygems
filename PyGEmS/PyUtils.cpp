@@ -31,7 +31,8 @@ namespace NSPyGEmS
   namespace bp = boost::python;
 
   //Extracted from BP Wiki
-  bp::object myImportModule ( const std::string &module, const std::string &path, bp::object &globals )
+  bp::object myImportModule( const std::string& module, const std::string& path,
+                             bp::object& globals )
   {
     bp::dict locals;
     locals["module_name"] = module;
@@ -42,17 +43,17 @@ namespace NSPyGEmS
 
     bp::exec( "import imp\n"
               "import sys\n"
-              "new_module = imp.load_module(module_name, open(path), path, ('py', 'U', imp.PY_SOURCE))\n"
-              ,globals,
+              "new_module = imp.load_module(module_name, open(path), path, ('py', 'U', imp.PY_SOURCE))\n",
+              globals,
               locals );
 
     std::cout << "---------------" << std::endl;
     return locals["new_module"];
   }
 
-  std::ostream &operator<< ( std::ostream &os, const bp::object &o )
+  std::ostream& operator<<( std::ostream& os, const bp::object& o )
   {
-    return os << bp::extract<std::string>( bp::str( o ))();
+    return os << bp::extract < std::string >( bp::str( o ))( );
   }
 }
 
