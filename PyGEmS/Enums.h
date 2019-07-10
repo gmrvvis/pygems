@@ -27,6 +27,7 @@ namespace NSPyGEmS
   enum TracingOperation
   {
     NONE,
+    METHOD,
     SIMPLIFY,
     ENHANCE,
     FIX

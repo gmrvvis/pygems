@@ -38,6 +38,7 @@ namespace NSPGManager
   {
     bp::enum_ < TracingOperation >( "TracingOperation" )
       .value( "NONE", TracingOperation::NONE )
+      .value( "METHOD", TracingOperation::METHOD )
       .value( "SIMPLIFY", TracingOperation::SIMPLIFY )
       .value( "ENHANCE", TracingOperation::ENHANCE )
       .value( "FIX", TracingOperation::FIX );

@@ -32,6 +32,11 @@ namespace NSPyGEmS
   {
       using Strategy::Strategy;
 
+      void method( ) override
+      {
+        get_override( "method" )( );
+      }
+
       void simplify( ) override
       {
         get_override( "simplify" )( );
