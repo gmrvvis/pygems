@@ -37,11 +37,11 @@ namespace NSPGManager
 
       PyGEmSManager(
 #ifdef PYGEMS_USE_PYTHON3
-        const std::string&, PyObject* (* initfunc)( void )
+          const std::string&, PyObject* (* initfunc)( void )
 #else
-        const std::string &, void ( *initfunc ) ( void )   //Python 2.7
+          const std::string &, void ( *initfunc ) ( void )   //Python 2.7
 #endif
-        , const std::string&, const std::string& );
+          , const std::string&, const std::string& );
 
       ~PyGEmSManager( );
 

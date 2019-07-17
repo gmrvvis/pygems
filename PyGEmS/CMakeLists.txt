@@ -39,5 +39,9 @@ set(PYGEMS_SOURCES
 #  PyGEmSManager.cpp
 #  StrategyFrameworkBPModule.cpp
   )
-
+set(PYGEMS_LINK_LIBRARIES
+    nsol
+    ${Boost_LIBRARIES}
+    ${PYTHON_LIBRARIES}
+    )
 common_library(PyGEmS)

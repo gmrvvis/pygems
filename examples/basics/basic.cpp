@@ -45,14 +45,15 @@ int main( int argc, char* argv[] )
   {
     //BPCode
 #ifdef PYGEMS_USE_PYTHON3
-    PyGEmSManager myPyGEmSManager( "StrFramework", &PyInit_StrFramework,
+      PyGEmSManager myPyGEmSManager( "StrFramework", &PyInit_StrFramework,
                                    "Strategies", std::string( argv[1] ));
 #else
-    //Python 2.7
-    PyGEmSManager myPyGEmSManager( "StrFramework", &initStrFramework,
-                                   "Strategies",  std::string( argv[1] ));
+      //Python 2.7
+      PyGEmSManager myPyGEmSManager( "StrFramework", &initStrFramework,
+                                     "Strategies",  std::string( argv[1] ));
 #endif
-    bp::object Strategy = myPyGEmSManager.getModuleAttrib( "Strategy" );
+
+      bp::object Strategy = myPyGEmSManager.getModuleAttrib( "Strategy" );
 
     Container _Container;
     StrategyParams lStrategyParams;

@@ -34,8 +34,9 @@ void MainWindow::testPyGEmS( )
 #else
     //Python 2.7
     myPyGEmSManager = new NSPGManager::PyGEmSManager("StrFramework", &NSPGManager::initStrFramework,
-                                                      "Strategies",  "Test-Python2.py");
+                                                       "Strategies",  "Test-Python2.py");
 #endif
+
 
     bp::object Strategy = myPyGEmSManager->getModuleAttrib( "Strategy" );
 

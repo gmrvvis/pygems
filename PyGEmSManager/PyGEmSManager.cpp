@@ -28,9 +28,9 @@ namespace NSPGManager
 
   PyGEmSManager::PyGEmSManager(
 #ifdef PYGEMS_USE_PYTHON3
-    const std::string& bpModName, PyObject* (* initfunc)( void )
+          const std::string& bpModName, PyObject* (* initfunc)( void )
 #else
-    const std::string &bpModName, void ( *initfunc ) ( void ) //Python 2.7
+          const std::string &bpModName, void ( *initfunc ) ( void ) //Python 2.7
 #endif
     , const std::string& modName, const std::string& modFile )
   {

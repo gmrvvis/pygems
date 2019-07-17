@@ -90,7 +90,7 @@ int main( int argc, char* argv[] )
 #else
     //Python 2.7
     PyGEmSManager myPyGEmSManager( "StrFramework", &initStrFramework,
-                                   "Strategies",  std::string( argv[1] ));
+                                     "Strategies",  std::string( argv[1] ));
 #endif
     bp::object Strategy = myPyGEmSManager.getModuleAttrib( "Strategy" );
 
