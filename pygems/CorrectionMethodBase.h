@@ -1,7 +1,8 @@
 /*
- * Copyright (c) 2017 CCS/GMRV/URJC/UPM.
+ * Copyright (c) 2017-2020 CCS/GMRV/URJC/UPM.
  *
  * Authors: Juan P. Brito <juanpedro.brito@upm.es>
+ *          Juan Jose Garcia Cantero <juanjose.garcia@urjc.es>
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License version 3.0 as published
@@ -18,31 +19,26 @@
  *
  */
 
-#ifndef __PYGEMS_CONTAINER__
-#define __PYGEMS_CONTAINER__
+#ifndef __PYGEMS_CORRECTIONMETHODBASE__
+#define __PYGEMS_CORRECTIONMETHODBASE__
 
-#include <vector>
-#include "StrategyParams.h"
+#include "TracingNode.h"
 
-namespace NSPyGEmS
+namespace pygems
 {
-  class Container
-  {
-      std::vector < StrategyParams > container;
+
+    class CorrectionMethodBase
+    {
 
     public:
 
-      void addElement( StrategyParams& );
+        CorrectionMethodBase( void ) { }
 
-      void setContainer( std::vector < StrategyParams >& );
+        virtual ~CorrectionMethodBase( ) = default;
 
-      const std::vector < StrategyParams >& getConstContainer( );
+        virtual void correct( ) = 0;
 
-      std::vector < StrategyParams >& getContainer( );
-
-      void preProcessContainer( );
-
-      void postProcessContainer( );
-  };
+    };
 }
+
 #endif //

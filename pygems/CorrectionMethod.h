@@ -1,7 +1,8 @@
 /*
- * Copyright (c) 2017 CCS/GMRV/URJC/UPM.
+ * Copyright (c) 2017-2020 CCS/GMRV/URJC/UPM.
  *
  * Authors: Juan P. Brito <juanpedro.brito@upm.es>
+ *          Juan Jose Garcia Cantero <juanjose.garcia@urjc.es>
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License version 3.0 as published
@@ -18,37 +19,32 @@
  *
  */
 
-#ifndef __PYGEMS_TSTRATEGY__
-#define __PYGEMS_TSTRATEGY__
+#ifndef __PYGEMS_CORRECTIONMETHOD__
+#define __PYGEMS_CORRECTIONMETHOD__
 
-#include "StrategyParams.h"
-#include "TContainer.h"
 
-namespace NSPyGEmS
+#include "CorrectionMethodBase.h"
+#include <boost/python.hpp>
+
+
+namespace pygems
 {
-  template<class T>
-  class TStrategy : public TContainer<T>
-  {
-  public:
 
-    TStrategy ( );
+    namespace bp = boost::python;
 
-    TStrategy ( const std::vector<T> & );
+    class CorrectionMethod final
+            : public CorrectionMethodBase
+            , public bp::wrapper < CorrectionMethodBase >
+    {
 
-    virtual ~TStrategy ( ) = default;
+        using CorrectionMethodBase::CorrectionMethodBase;
 
-    virtual void simplify ( ) = 0;
+        void correct( ) override
+        {
+            get_override("correct")( );
+        };
 
-    virtual void enhance ( ) = 0;
-
-    virtual void fix ( ) = 0;
-
-    virtual void eval ( ) = 0;
-
-    virtual void sendPartameterToPython ( float ) = 0;
-
-    void receivingParameterFromPython ( float );
-  };
+    };
 }
 
 #endif //
