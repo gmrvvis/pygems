@@ -69,6 +69,44 @@ namespace pygems
         return outNodes;
     }
 
+    std::string CorrectionManager::pyErrorMessage( void )
+    {
+        std::string pyErrorMessage;
+
+        PyObject * ptype, *pvalue, *ptraceback;
+        PyErr_Fetch(&ptype, &pvalue, &ptraceback);
+        if (pvalue)
+        {
+            bp::handle<> hType(ptype);
+            bp::object extype(hType);
+            bp::handle<> hTraceback(ptraceback);
+            bp::object traceback(hTraceback);
+
+            PyObject * valueStr = PyObject_Str( pvalue );
+            std::string strErrorMessage;
+            if ( valueStr )
+                strErrorMessage = PyUnicode_AsUTF8( valueStr );
+
+            long lineno = bp::extract<long>( traceback.attr( "tb_lineno" ));
+            std::string filename = bp::extract<std::string>(
+                    traceback.attr( "tb_frame" ).attr( "f_code" ).attr(
+                            "co_filename" ));
+            if ( filename.compare( "<string>" ) == 0 )
+                filename = std::string( "" );
+
+            pyErrorMessage = std::string( "File \"" ) + filename +
+                             std::string( "\", line " ) +
+                             std::to_string( lineno ) +
+                             std::string( "\nError: " ) + strErrorMessage;
+
+        }
+
+        PyErr_Restore( ptype, pvalue, ptraceback );
+
+        return pyErrorMessage;
+    }
+
+
 
     bp::object CorrectionManager::_importModule(const std::string &module_,
                                                 const std::string &path_, bp::object &globals_ )
@@ -77,15 +115,12 @@ namespace pygems
         locals["module_name"] = module_;
         locals["path"] = path_;
 
-        std::cout << module_ << std::endl;
-        std::cout << path_ << std::endl;
 
         bp::exec( "import imp\n"
                   "import sys\n"
                   "new_module = imp.load_module(module_name, open(path), path, ('py', 'U', imp.PY_SOURCE))\n",
                   globals_, locals );
 
-        std::cout << "Imported module: " << module_ << std::endl;
         return locals["new_module"];
     }
 

@@ -42,7 +42,7 @@ int main( int argc, char* argv[] )
         return 1;
     }
 
-    int numNodes = atoi( argv[2] );
+    int numNodes = std::atoi( argv[2] );
     try
     {
         auto cManager = pygems::CorrectionManager( std::string( argv[1] ));
@@ -74,7 +74,9 @@ int main( int argc, char* argv[] )
     catch( const bp::error_already_set& )
     {
         std::cerr << "Python execution error: " << std::endl;
-        PyErr_Print( );
+        auto errMessage = pygems::CorrectionManager::pyErrorMessage( );
+        std::cout << errMessage << std::endl;
+
         return 1;
     }
 }

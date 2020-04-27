@@ -67,6 +67,9 @@ namespace pygems
         PYGEMS_API
         TracingNodes correct( const TracingNodes& nodes_ );
 
+        PYGEMS_API
+        static std::string pyErrorMessage( );
+
     private:
 
         bp::object _importModule ( const std::string& module_,

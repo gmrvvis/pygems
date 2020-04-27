@@ -17,5 +17,5 @@ class CorrectionMethod( ):
       newNode.position.z = inNode.position.z
       outNodes.append( newNode )
 
-    # Same as
+    # Equivalent to
     # outNodes = inNodes;
