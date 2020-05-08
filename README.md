@@ -3,7 +3,7 @@ PyGEmS
 
 ## Introduction
 
-Description
+Python Generic Embedded System for C++
 
 ## Dependencies
 

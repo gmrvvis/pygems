@@ -1,0 +1,26 @@
+stages:
+ - build
+
+Ubuntu-Subproject:
+ stage: build
+ script:
+  - date
+  - hostname
+  - uname -a
+  - export CMAKE_EXTRA_ARGS="-DCLONE_SUBPROJECTS=ON"
+  - export BUILD_GENERATOR="Ninja"
+  - bash .gitlab-ci.sh
+ tags:
+  - ubuntu
+
+Win7:
+ stage: build
+ script:
+  - call %ENVFILESDIR%\Boost-1.72-vs14-x64.bat
+  - call %ENVFILESDIR%\eigen-3.1.2-vs12-x64.bat
+  - set BUILD_GENERATOR=Visual Studio 14 Win64
+  - set CMAKE_EXTRA_ARGS=-DCLONE_SUBPROJECTS=ON
+  - set PATH=%PATH%;"c:\Program Files\Git\bin"
+  - bash.exe --login .gitlab-ci.sh
+ tags:
+  - win7
