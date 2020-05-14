@@ -1,5 +1,5 @@
 cmake_minimum_required (VERSION 3.10)
-project (pygems VERSION 0.0.2)
+project (pygems VERSION 0.0.1)
 set( pygems_VERSION_ABI 1 )
 
 if(NOT CMAKE_BUILD_TYPE)
@@ -19,6 +19,16 @@ list( APPEND CMAKE_MODULE_PATH
 if( NOT EXISTS ${CMAKE_SOURCE_DIR}/CMake/common/Common.cmake )
  message( FATAL_ERROR "CMake/common missing, run: git submodule update --init")
 endif( )
+
+option( PYGEMS_OPTIONALS_AS_REQUIRED
+        "Force optional dependencies as required" OFF )
+
+if ( PYGEMS_OPTIONALS_AS_REQUIRED )
+    set( PYGEMS_OPTS_FIND_ARGS "REQUIRED" )
+else()
+    set( PYGEMS_OPTS_FIND_ARGS "" )
+endif()
+
 
 include( GitExternal )
 
@@ -41,9 +51,7 @@ common_find_package(Boost REQUIRED COMPONENTS date_time filesystem iostreams
         python${PYTHON_VERSION_MAJOR}${PYTHON_VERSION_MINOR})
 list(APPEND PYGEMS_DEPENDENT_LIBRARIES Eigen3 ${Boost_LIBRARIES}
   ${PYTHON_LIBRARIES})
-common_find_package(nsol)
-
-
+common_find_package(nsol ${PYGEMS_OPTS_FIND_ARGS})
 
 common_find_package_post( )
 

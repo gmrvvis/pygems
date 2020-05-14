@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2017-2020 CCS/GMRV/URJC/UPM.
  *
  * Authors: Juan P. Brito <juanpedro.brito@upm.es>

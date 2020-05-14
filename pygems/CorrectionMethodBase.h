@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2017-2020 CCS/GMRV/URJC/UPM.
  *
  * Authors: Juan P. Brito <juanpedro.brito@upm.es>
@@ -18,7 +18,6 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  *
  */
-
 #ifndef __PYGEMS_CORRECTIONMETHODBASE__
 #define __PYGEMS_CORRECTIONMETHODBASE__
 
